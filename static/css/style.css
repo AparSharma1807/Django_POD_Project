@@ -1,0 +1,136 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #f4f6fb;
+    padding-left: 120px;
+    padding-right: 120px;
+    padding-top: 40px;
+    color: #333;
+}
+
+/* Container */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Form Card */
+form {
+    background: rgb(236, 235, 235);
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+}
+
+form:hover {
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+form input[type="text"],
+form input[type="file"] {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.2s;
+}
+
+form input[type="text"]:focus,
+form input[type="file"]:focus {
+    border-color: #4e73df;
+    box-shadow: 0 0 4px rgba(78, 115, 223, 0.4);
+}
+
+/* Submit button */
+button {
+    background: #4e73df;
+    color: white;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 15px;
+}
+
+button:hover {
+    background: #3557b7;
+}
+
+/* Existing orders list */
+ul {
+    list-style: none;
+    margin-top: 20px;
+}
+
+ul li {
+    background: white;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+}
+
+ul li:hover {
+    transform: scale(1.01);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+ul li img {
+    margin-top: 10px;
+    max-width: 200px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+/* Heading */
+h1, h2 {
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 600;
+    color: #25396f;
+    text-decoration: underline;
+}
+
+.search-box {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 30px;
+}
+
+.search-box input {
+    width: 70%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.search-box button {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    background: #4e73df;
+    color: white;
+    cursor: pointer;
+}
+
+.result-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+

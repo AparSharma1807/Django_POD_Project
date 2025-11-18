@@ -1,0 +1,34 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+    <title>Search PODs</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="container">
+
+    <h1>Search PODs By Order IDs</h1>
+
+    <form method="get" class="search-box">
+        <input type="text" name="order_id" placeholder="Enter Order ID"
+               value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <br>
+
+    {% if query %}
+        {% if result == "notfound" %}
+            <p style="color:red;">No order found for this order ID: {{ query }}</p>
+        {% else %}
+        <div class="result-card">
+                <h3>Order ID: {{ result.order_id }}</h3>
+                <p>Brand Name: {{ result.brand_name }}</p>
+                <img src="{{ result.image.url }}" style="max-width:200px;">
+            </div>
+        {% endif %}
+    {% endif %}
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
