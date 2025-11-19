@@ -7,7 +7,7 @@ from apar_app.views import index, search_order
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('apar_app.urls')),
+    # path('', include('apar_app.urls')),
     path('', index, name='home'),
     path('search/', search_order, name='search'),
 ]
