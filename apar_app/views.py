@@ -28,3 +28,21 @@ def search_order(request):
         'query': query,
         'result': result,
     })
+
+def bulk_upload(request):
+    if request.method == "POST":
+        order_ids = request.POST.get("order_ids").split(",")
+        order_ids = [oid.strip() for oid in order_ids]
+
+        images = request.FILES.getlist("images")
+
+        for oid, img in zip(order_ids, images):
+            Order.objects.create(
+                order_id=oid,
+                brand_name="Bulk Upload",
+                image=img
+            )
+
+        return render(request, "bulk_upload.html", {"success": True})
+
+    return render(request, "bulk_upload.html")

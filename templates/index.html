@@ -16,6 +16,23 @@
 </div>
   <h1>Upload Your POD</h1>
 
+  <div style="text-align:right; margin-top:20px;">
+    <a href="{% url 'bulk_upload' %}">
+        <button style="
+            background:#4CAF50;
+            color:white;
+            padding:10px 20px;
+            margin-bottom:20px;
+            border:none;
+            border-radius:8px;
+            font-size:16px;
+            cursor:pointer;">
+            Bulk Upload
+        </button>
+    </a>
+</div>
+
+
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}

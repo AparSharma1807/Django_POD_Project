@@ -1,0 +1,18 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <h2>Bulk Upload PODs</h2>
+
+<body>
+    <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <label>Order IDs (comma separated):</label>
+    <input style="margin-bottom:50px ;" type="text" name="order_ids" placeholder="ABC123, XYZ456, PQR789">
+
+      <label>Upload ZIP / Images:</label>
+    <input type="file" name="images" multiple>
+
+    <button type="submit">Upload</button>
+</form>
+</body>
