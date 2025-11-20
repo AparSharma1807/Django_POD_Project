@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import OrderForm
 from .models import Order
+from .forms import BulkUploadForm
 
 def index(request):
     if request.method == 'POST':
@@ -29,20 +30,31 @@ def search_order(request):
         'result': result,
     })
 
+
 def bulk_upload(request):
     if request.method == "POST":
-        order_ids = request.POST.get("order_ids").split(",")
-        order_ids = [oid.strip() for oid in order_ids]
+        images = request.FILES.getlist('images')
+        order_ids = request.POST.get('order_ids')
 
-        images = request.FILES.getlist("images")
+        # Split comma-separated order IDs
+        order_list = [o.strip() for o in order_ids.split(",")]
 
-        for oid, img in zip(order_ids, images):
+        # Check if order_ids count matches image count
+        if len(order_list) != len(images):
+            return render(request, "bulk_upload.html", {
+                "error": "Number of images must match with number of order IDs."
+            })
+
+        # Save each image with its order ID
+        for order_id, image in zip(order_list, images):
             Order.objects.create(
-                order_id=oid,
-                brand_name="Bulk Upload",
-                image=img
+                order_id=order_id,
+                brand_name="",    # or remove this field if not required
+                image=image
             )
 
-        return render(request, "bulk_upload.html", {"success": True})
+        return render(request, "bulk_upload.html", {
+            "success": True
+        })
 
     return render(request, "bulk_upload.html")

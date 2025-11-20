@@ -1,8 +1,8 @@
 from django.db import models
 
 class Order(models.Model):
-    order_id = models.CharField(max_length=50)
-    brand_name = models.CharField(max_length=100)
+    order_id = models.CharField(max_length=200)
+    brand_name = models.CharField(max_length=200 ,blank=True, null=True)
     image = models.ImageField(upload_to='uploads/')
 
     created_at = models.DateTimeField(auto_now_add=True)
