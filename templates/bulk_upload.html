@@ -1,23 +1,73 @@
 {% load static %}
-<title>Bulk Upload</title>
-<div style="position: absolute; top: 10px; left: 10px;">
-    <img src="{% static 'images/Zippee_logo.jpg_140619.jpg' %}" 
-         alt="Logo" 
-         style="height: 70px;">
-</div>
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <h1 style="margin-top: 50px;" >Bulk Upload PODs</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bulk Upload</title>
+
+    <!-- Logo -->
+    <div style="position: absolute; top: 10px; left: 10px;">
+        <img src="{% static 'images/Zippee_logo.jpg_140619.jpg' %}" 
+             alt="Logo" 
+             style="height: 70px;">
+    </div>
+
+    <!-- Load CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
 
 <body>
+
+    <!-- Page Title -->
+    <h1 style="margin-top: 50px;">Bulk Upload PODs</h1>
+
+    <!-- SUCCESS MESSAGE (only once) -->
+    {% if messages %}
+        {% for message in messages %}
+            <div style="
+                background: #4CAF50;
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                font-size: 18px;
+                font-weight: 600;
+                margin-bottom: 20px;
+                animation: slideDown 0.6s ease-out, fadeOut 0.5s ease-in 4s forwards;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            ">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- FORM START -->
     <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
+        {% csrf_token %}
 
-    <label>Order IDs (comma separated):</label>
-    <input style="margin-bottom:50px ;" type="text" name="order_ids" placeholder="ABC123, XYZ456, PQR789">
+        <label>Order IDs (comma separated):</label>
+        <input style="margin-bottom:50px;" type="text" name="order_ids" placeholder="ABC123, XYZ456, PQR789">
 
-      <label>Upload ZIP / Images:</label>
-    <input type="file" name="images" multiple>
+        <label>Upload Images:</label>
+        <input type="file" name="images" multiple>
 
-    <button type="submit">Upload</button>
-</form>
+        <button type="submit">Upload</button>
+    </form>
+    <!-- FORM END -->
+
+    <!-- ERROR MESSAGE (only once) -->
+    {% if error %}
+        <div class="error-msg" style="
+            padding: 12px;
+            background: #ffdddd;
+            border: 1px solid #ff4d4d;
+            border-radius: 6px;
+            color: #d00000;
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: bold;
+        ">
+            {{ error }}
+        </div>
+    {% endif %}
+
 </body>
+</html>

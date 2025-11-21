@@ -2,13 +2,17 @@ from django.shortcuts import render, redirect
 from .forms import OrderForm
 from .models import Order
 from .forms import BulkUploadForm
+from django.contrib import messages
+
 
 def index(request):
     if request.method == 'POST':
         form = OrderForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('home')   # redirect to clear POST
+            form.save()  
+            messages.success(request, "POD Uploaded Successfully!") # ← Add here
+            return redirect('home')
+        # redirect to clear POST
     else:
         form = OrderForm()
 
@@ -30,31 +34,30 @@ def search_order(request):
         'result': result,
     })
 
-
 def bulk_upload(request):
     if request.method == "POST":
         images = request.FILES.getlist('images')
         order_ids = request.POST.get('order_ids')
 
         # Split comma-separated order IDs
-        order_list = [o.strip() for o in order_ids.split(",")]
+        order_list = [o.strip() for o in order_ids.split(",") if o.strip()]
 
-        # Check if order_ids count matches image count
+        # Check count mismatch
         if len(order_list) != len(images):
-            return render(request, "bulk_upload.html", {
-                "error": "Number of images must match with number of order IDs."
-            })
+            messages.error(request, "Count Of PODs Must Match With Count Of Order IDs.")
+            return render(request, "bulk_upload.html")
 
         # Save each image with its order ID
         for order_id, image in zip(order_list, images):
             Order.objects.create(
                 order_id=order_id,
-                brand_name="",    # or remove this field if not required
+                brand_name="",
                 image=image
             )
 
-        return render(request, "bulk_upload.html", {
-            "success": True
-        })
+        # ✔ SUCCESS MESSAGE ONLY ONCE
+        messages.success(request, "PODs Uploaded Successfully!")
+
+        return redirect("bulk_upload")  # redirect to clear POST
 
     return render(request, "bulk_upload.html")
