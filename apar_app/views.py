@@ -55,9 +55,7 @@ def bulk_upload(request):
                 image=image
             )
 
-        # ✔ SUCCESS MESSAGE ONLY ONCE
         messages.success(request, "PODs Uploaded Successfully!")
 
-        return redirect("bulk_upload")  # redirect to clear POST
-
+        return redirect("bulk_upload")  
     return render(request, "bulk_upload.html")

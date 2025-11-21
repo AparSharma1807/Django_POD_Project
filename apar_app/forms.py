@@ -9,6 +9,11 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ['order_id', 'brand_name', 'image']
+        labels = {
+            'order_id': 'Enter Order ID',
+            'brand_name': 'Enter Brand Name',
+            'image': 'Upload POD'
+        }
 
 class BulkUploadForm(forms.Form):
     images = forms.FileField(
