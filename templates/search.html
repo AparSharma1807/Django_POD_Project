@@ -24,7 +24,7 @@
 
     {% if query %}
         {% if result == "notfound" %}
-            <p style="color:red;">No order found for this order ID: {{ query }}</p>
+            <p style="color:red;">No POD Found For This Order ID: {{ query }}</p>
         {% else %}
         <div class="result-card">
                 <h3>Order ID: {{ result.order_id }}</h3>

@@ -72,6 +72,7 @@ WSGI_APPLICATION = 'apar.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+# apar_app/models.py, apar/views.py, apar_app/forms.py
 
 DATABASES = {
     'default': {
@@ -128,3 +129,4 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_URL = '/static/'
+ 

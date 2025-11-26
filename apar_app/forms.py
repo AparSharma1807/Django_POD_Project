@@ -4,7 +4,6 @@ from .models import Order
 class MultiFileInput(forms.ClearableFileInput):
     allow_multiple_selected = True
 
-
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
@@ -14,11 +13,9 @@ class OrderForm(forms.ModelForm):
             'brand_name': 'Enter Brand Name',
             'image': 'Upload POD'
         }
-
 class BulkUploadForm(forms.Form):
     images = forms.FileField(
         widget=MultiFileInput(attrs={'multiple': True}),
         required=True
     )
     order_ids = forms.CharField(required=True)
-

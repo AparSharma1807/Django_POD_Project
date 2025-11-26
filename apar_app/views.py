@@ -37,25 +37,27 @@ def search_order(request):
 def bulk_upload(request):
     if request.method == "POST":
         images = request.FILES.getlist('images')
-        order_ids = request.POST.get('order_ids')
 
-        # Split comma-separated order IDs
-        order_list = [o.strip() for o in order_ids.split(",") if o.strip()]
+        # Loop through all uploaded images
+        for index, image in enumerate(images):
+            # Get order IDs for THIS image
+            key = f"order_ids_for_image_{index}"
+            order_ids = request.POST.get(key, "")
 
-        # Check count mismatch
-        if len(order_list) != len(images):
-            messages.error(request, "Count Of PODs Must Match With Count Of Order IDs.")
-            return render(request, "bulk_upload.html")
+            if not order_ids.strip():
+                continue  # skip if empty
+            
+            order_list = [o.strip() for o in order_ids.split(",") if o.strip()]
 
-        # Save each image with its order ID
-        for order_id, image in zip(order_list, images):
-            Order.objects.create(
-                order_id=order_id,
-                brand_name="",
-                image=image
-            )
+            # Save one database row per order ID
+            for order_id in order_list:
+                Order.objects.create(
+                    order_id=order_id,
+                    brand_name="",
+                    image=image
+                )
 
         messages.success(request, "PODs Uploaded Successfully!")
+        return redirect("bulk_upload")
 
-        return redirect("bulk_upload")  
     return render(request, "bulk_upload.html")

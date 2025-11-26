@@ -11,7 +11,6 @@ urlpatterns = [
     path('', index, name='home'),
     path('search/', search_order, name='search'),
     path('bulk-upload/', bulk_upload, name='bulk_upload'),
-
 ]
 
 # Serve media during development only
