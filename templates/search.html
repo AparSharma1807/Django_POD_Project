@@ -4,13 +4,15 @@
 <head>
     <title>Search PODs</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+
 </head>
 <body class="container">
     <div style="position: absolute; top: 10px; left: 10px;">
     <img src="{% static 'images/Zippee_logo.jpg_140619.jpg' %}" 
          alt="Logo" 
          style="height: 70px;">
-</div>
+        </div>
 
     <h1 style="margin-top: 50px;">Search PODs By Order IDs</h1>
 
@@ -19,12 +21,12 @@
                value="{{ query |default:'' }}">
         <button type="submit">Search</button>
     </form>
-
     <br>
 
     {% if query %}
         {% if result == "notfound" %}
-            <p style="color:red;">No POD Found For This Order ID: {{ query }}</p>
+            <p style="color:red; box-shadow: 0 0 10px black; padding:20px; text-align: center; border-radius: 20px;">Sorry, No POD Found For This Order ID: {{ query }}</p>
+            
         {% else %}
         <div class="result-card">
                 <h3>Order ID: {{ result.order_id }}</h3>

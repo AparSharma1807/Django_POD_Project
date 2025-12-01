@@ -28,6 +28,7 @@ def search_order(request):
             result = Order.objects.get(order_id__iexact=query)
         except Order.DoesNotExist:
             result = "notfound"
+            # return redirect('search')
 
     return render(request, 'search.html', {
         'query': query,
@@ -56,8 +57,6 @@ def bulk_upload(request):
                     brand_name="",
                     image=image
                 )
-
         messages.success(request, "PODs Uploaded Successfully!")
         return redirect("bulk_upload")
-
     return render(request, "bulk_upload.html")
